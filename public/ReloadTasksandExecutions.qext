@@ -2,7 +2,7 @@
     "type": "mashup",
     "name": "Reload Tasks and Executions",
     "description": "Reload tasks and executions",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Stefan Stoichev (@countnazgul)",
     "homepage": "https://sstoichev.eu",
     "keywords": "qlik-sense, mashup",

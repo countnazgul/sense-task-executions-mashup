@@ -144,11 +144,13 @@
       </div></Tile
     >
 
-    <Accordion size="xl">
-      {#each tasksDataFiltered as task}
-        <Task {task} />
-      {/each}
-    </Accordion>
+    <div class="accordion">
+      <Accordion size="xl">
+        {#each tasksDataFiltered as task}
+          <Task {task} />
+        {/each}
+      </Accordion>
+    </div>
   {/await}
 </main>
 
@@ -161,7 +163,7 @@
     margin: 0 auto;
     height: calc(100vh - 20px);
     width: calc(100vw - 20px);
-    overflow: auto;
+    overflow: hidden;
   }
 
   .title {
@@ -206,5 +208,10 @@
 
   .link {
     cursor: pointer;
+  }
+
+  .accordion {
+    overflow: auto;
+    height: 100%;
   }
 </style>

@@ -112,7 +112,6 @@
   </ComposedModal>
 
   <DataTable
-    useStaticWidth
     sortable
     title="Executions"
     headers={[
