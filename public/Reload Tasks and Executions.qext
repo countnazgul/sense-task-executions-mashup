@@ -1,0 +1,14 @@
+{
+    "type": "mashup",
+    "name": "Reload Tasks and Executions",
+    "description": "Reload tasks and executions",
+    "version": "1.0.0",
+    "author": "Stefan Stoichev (@countnazgul)",
+    "homepage": "https://sstoichev.eu",
+    "keywords": "qlik-sense, mashup",
+    "license": "MIT",
+    "repository": "https://github.com/countnazgul/sense-task-executions-mashup",
+    "dependencies": {
+        "qlik-sense": ">=3.0.x"
+    }
+}
