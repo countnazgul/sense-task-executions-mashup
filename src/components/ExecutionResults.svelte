@@ -5,6 +5,7 @@
     ModalHeader,
     ModalBody,
     ModalFooter,
+    Loading,
   } from "carbon-components-svelte";
   import { saveAs } from "file-saver";
   import { detailTypes, taskExecutionStatus } from "../lib/enum";
@@ -15,6 +16,7 @@
   export let taskId;
 
   let modalShown = false;
+  let modalDataLoaded = false;
   let modalContent = "";
   let modalLabel = "";
   let selectedExecutionId = "";
@@ -48,6 +50,10 @@
   }
 
   async function generateScriptLog(resultId) {
+    modalDataLoaded = false;
+    modalLabel = "Script log";
+    modalShown = true;
+
     const generateLog = await Get(
       `ReloadTask/${taskId}/scriptlogfile?executionResultId=${resultId}`
     );
@@ -58,11 +64,14 @@
 
     selectedExecutionId = resultId;
     modalContent = logContent.data;
-    modalLabel = "Script log";
-    modalShown = true;
+    modalDataLoaded = true;
   }
 
   function showDetails(details, resultId) {
+    modalDataLoaded = false;
+    modalLabel = "Execution details";
+    modalShown = true;
+
     let detailsMessage = details.map(
       (d) => `${d.detailCreatedDate}\t${d.message}`
     );
@@ -75,8 +84,7 @@
 
     selectedExecutionId = resultId;
     modalContent = detailsMessage;
-    modalLabel = "Execution details";
-    modalShown = true;
+    modalDataLoaded = true;
   }
 
   function downloadContent() {
@@ -105,7 +113,13 @@
     <ModalHeader label={modalLabel} title="{taskName} ({taskId})" />
     <ModalBody>
       <div class="modal-content">
-        <pre>{modalContent}</pre>
+        {#if !modalDataLoaded}
+          <div class="data-loading">
+            <Loading withOverlay={false} />
+          </div>
+        {:else}
+          <pre>{modalContent}</pre>
+        {/if}
       </div>
     </ModalBody>
     <ModalFooter primaryButtonText="Download" secondaryButtonText="Close" />
@@ -143,11 +157,20 @@
 <style>
   :global(.bx--modal-content) {
     border-top: 1px solid;
+    margin-bottom: 0px !important;
+    min-height: 200px !important;
   }
 
   .link {
     cursor: pointer;
     color: #ff3e00;
     text-decoration: underline;
+  }
+
+  .data-loading {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>

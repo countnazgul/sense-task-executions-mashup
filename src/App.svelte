@@ -164,6 +164,8 @@
     height: calc(100vh - 20px);
     width: calc(100vw - 20px);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .title {
